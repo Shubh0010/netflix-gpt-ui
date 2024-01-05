@@ -5,6 +5,8 @@
 - Header
 - Login
 - Sign up
+- Form Validation
+- useRef hooks
 
 # Features
 

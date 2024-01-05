@@ -7,6 +7,8 @@
 - Sign up
 - Form Validation
 - useRef hooks
+- Firebase setup
+- create sign up user in firebase
 
 # Features
 

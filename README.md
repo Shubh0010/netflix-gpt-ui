@@ -9,6 +9,9 @@
 - useRef hooks
 - Firebase setup
 - create sign up user in firebase
+- implement sign in in firebase
+- create redux store
+- implement sign out
 
 # Features
 

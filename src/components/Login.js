@@ -1,8 +1,19 @@
 import { useRef, useState } from "react"
 import Header from "./Header"
 import { checkValidData } from "../utils/validate";
+import { signUpUser } from "../firebase-service/sign-up";
+import { signInUser } from "../firebase-service/sign-in";
+import { useNavigate } from "react-router-dom";
+import { updateUserProfile } from "../firebase-service/update-user-profile";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { auth } from "../config/firebase";
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const [isSignInForm, setIsSignInForm] = useState(true);
 
@@ -17,11 +28,60 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   }
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
 
     const message = checkValidData(isSignInForm, name?.current?.value, email?.current?.value, password?.current?.value);
 
     setErrorMessage(message);
+
+    if (message) return;
+
+    if (!isSignInForm) {
+
+      //sign up
+
+      const signUpData = await signUpUser({
+
+        email: email?.current?.value,
+        password: password?.current?.value,
+      })
+
+      if (signUpData.status === 'failure') {
+
+        setErrorMessage(signUpData.errorMessage);
+        return;
+      }
+
+      await updateUserProfile({ name: name?.current?.value });
+
+      const updatedUser = auth.currentUser;
+
+      dispatch(addUser({
+        uid: updatedUser.uid,
+        email: updatedUser.email,
+        displayName: updatedUser.displayName
+      }));
+
+      navigate('/browse');
+    }
+    else {
+
+      //sign in
+
+      const signInData = await signInUser({
+
+        email: email?.current?.value,
+        password: password?.current?.value,
+      })
+
+      if (signInData.status === 'failure') {
+
+        setErrorMessage(signInData.errorMessage);
+        return;
+      }
+
+      navigate('/browse');
+    }
   }
 
   return (
@@ -32,7 +92,7 @@ const Login = () => {
         alt="body-wallpaper"
         src="https://assets.nflxext.com/ffe/siteui/vlv3/c38a2d52-138e-48a3-ab68-36787ece46b3/eeb03fc9-99c6-438e-824d-32917ce55783/IN-en-20240101-popsignuptwoweeks-perspective_alpha_website_small.jpg"
       />
-      <form 
+      <form
         onSubmit={(e) => e.preventDefault()}
         className="w-3/12 absolute p-12 my-36 mx-auto right-0 left-0 bg-gray-950 text-white bg-opacity-80"
       >

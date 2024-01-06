@@ -1,5 +1,6 @@
 import { updateProfile } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { RESPONSE_STATUS } from "../utils/constant";
 
 export const updateUserProfile = ({ name }) => {
 
@@ -12,13 +13,13 @@ export const updateUserProfile = ({ name }) => {
     }).then(() => {
 
       resolve ({
-        status: 'success'
+        status: RESPONSE_STATUS.SUCCESS
       });
     
     }).catch(() => {
       
       resolve ({
-        status: 'failure'
+        status: RESPONSE_STATUS.FAILURE
       });
 
     });

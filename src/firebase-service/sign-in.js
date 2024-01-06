@@ -1,5 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { RESPONSE_STATUS } from "../utils/constant";
+
 
 export const signInUser = ({ email, password }) => {
 
@@ -10,7 +12,7 @@ export const signInUser = ({ email, password }) => {
         const user = userCredential.user;
 
         resolve({
-          status: 'success',
+          status: RESPONSE_STATUS.SUCCESS,
           user
         });
       })
@@ -18,7 +20,7 @@ export const signInUser = ({ email, password }) => {
         const errorMessage = error.message;
 
         resolve({
-          status: 'failure',
+          status: RESPONSE_STATUS.FAILURE,
           errorMessage
         });
       });

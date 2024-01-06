@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { addUser, removeUser } from '../utils/userSlice';
+import { APP_LOGO, PROFILE_LOGO } from '../utils/constant';
 
 const Header = () => {
 
@@ -54,13 +55,13 @@ const Header = () => {
   return (
     <div className='absolute px-8 py-2 bg-gradient-to-b from-gray-500 z-10 w-screen flex justify-between'>
       <img className='w-60'
-        src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png'
+        src={APP_LOGO}
         alt='logo' />
       {user && <div className='flex'>
         <img
           className='w-12 h-12 my-6 p-2'
           alt='profile-logo'
-          src='https://occ-0-3647-3646.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABcLtVOXjghzlDrVwmPHGQtkXjoJPmpISBttze62ZpxaaFWq-LZVH5yZxMD15UVLU6nd4GIUtTSHOMsbUOdPCIYRL2-2bGNU.png?r=b38'
+          src={PROFILE_LOGO}
         ></img>
         <button
           className='cursor-pointer'

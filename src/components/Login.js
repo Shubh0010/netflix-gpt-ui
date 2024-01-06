@@ -3,15 +3,12 @@ import Header from "./Header"
 import { checkValidData } from "../utils/validate";
 import { signUpUser } from "../firebase-service/sign-up";
 import { signInUser } from "../firebase-service/sign-in";
-import { useNavigate } from "react-router-dom";
 import { updateUserProfile } from "../firebase-service/update-user-profile";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { auth } from "../config/firebase";
 
 const Login = () => {
-
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -61,8 +58,6 @@ const Login = () => {
         email: updatedUser.email,
         displayName: updatedUser.displayName
       }));
-
-      navigate('/browse');
     }
     else {
 
@@ -79,8 +74,6 @@ const Login = () => {
         setErrorMessage(signInData.errorMessage);
         return;
       }
-
-      navigate('/browse');
     }
   }
 

@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { signOutUser } from '../firebase-service/sign-out'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../config/firebase';
+import { addUser, removeUser } from '../utils/userSlice';
 
 const Header = () => {
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
 
@@ -13,15 +18,36 @@ const Header = () => {
 
     let isSignOutSuccess = await signOutUser();
 
-    if (isSignOutSuccess) {
-
-      navigate('/');
-
-    } else {
+    if (!isSignOutSuccess) {
 
       window.alert('Cannot Sign out at the moment');
+
     }
   }
+
+  useEffect(() => {
+
+    onAuthStateChanged(auth, (user) => {
+
+      if (user) {
+
+        dispatch(addUser({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName
+        }));
+
+        navigate('/browse');
+
+      } else {
+
+        dispatch(removeUser());
+
+        navigate('/');
+      }
+    });
+
+  }, []);
 
   return (
     <div className='absolute px-8 py-2 bg-gradient-to-b from-gray-500 z-10 w-screen flex justify-between'>

@@ -11,3 +11,7 @@ export const RESPONSE_STATUS = {
   SUCCESS: 'success',
   FAILURE: 'failure',
 }
+
+export const CLIP_TYPE = {
+  TRAILER: 'Trailer'
+}

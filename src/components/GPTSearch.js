@@ -6,7 +6,7 @@ const GPTSearch = () => {
   return (
     <div>
       <img
-        className="absolute -z-10"
+        className="absolute -z-10 opacity-65"
         alt="body-wallpaper"
         src={SIGN_IN_BG_IMAGE}
       />

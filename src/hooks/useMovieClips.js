@@ -1,12 +1,14 @@
 import { useEffect } from "react"
 import { movieTrailer } from "../tmdb-service/movie-trailer";
 import { CLIP_TYPE, RESPONSE_STATUS } from "../utils/constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTrailerVideo } from "../utils/moviesSlice";
 
 const useMovieClips = (movieId) => {
 
   const dispatch = useDispatch();
+
+  const trailerVideo = useSelector(store => store?.movies?.trailerVideo);
 
   const getMovieTrailer = async () => {
 
@@ -27,7 +29,7 @@ const useMovieClips = (movieId) => {
 
   useEffect(() => {
 
-    getMovieTrailer();
+    !trailerVideo && getMovieTrailer();
 
   }, []);
 }

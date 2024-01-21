@@ -2,12 +2,14 @@
 import { useEffect } from "react";
 import { nowPlayingMovies } from "../tmdb-service/movies-list";
 import { RESPONSE_STATUS } from "../utils/constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNowPlayingMovies } from '../utils/moviesSlice';
 
 const useNowPlayingMovies = () => {
 
   const dispatch = useDispatch();
+
+  const existingNowPlayingMovies = useSelector(store => store?.movies?.nowPlayingMovies);
 
   const getNowPlayingMovies = async () => {
 
@@ -24,7 +26,7 @@ const useNowPlayingMovies = () => {
 
   useEffect(() => {
 
-    getNowPlayingMovies();
+    !existingNowPlayingMovies && getNowPlayingMovies();
 
   }, []);
 

@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { addUser, removeUser } from '../utils/userSlice';
 import { APP_LOGO, PROFILE_LOGO } from '../utils/constant';
+import { toggleGptSearchView } from '../utils/gptSlice';
 
 const Header = () => {
 
@@ -24,6 +25,11 @@ const Header = () => {
       window.alert('Cannot Sign out at the moment');
 
     }
+  }
+
+  const handleGPTClick = async () => {
+
+    dispatch(toggleGptSearchView());
   }
 
   useEffect(() => {
@@ -58,6 +64,12 @@ const Header = () => {
         src={APP_LOGO}
         alt='logo' />
       {user && <div className='flex h-24 mt-0'>
+        <button 
+          className='cursor-pointer text-white bg-slate-900 mx-4 rounded-md py-2 h-16 px-4 mt-6'
+          onClick={handleGPTClick}
+        >
+          GPT Search
+        </button>
         <img
           className='w-16 h-16 my-6 p-2'
           alt='profile-logo'

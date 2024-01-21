@@ -10,8 +10,23 @@ export const SIGN_IN_BG_IMAGE =
 export const RESPONSE_STATUS = {
   SUCCESS: 'success',
   FAILURE: 'failure',
-}
+};
 
 export const CLIP_TYPE = {
   TRAILER: 'Trailer'
-}
+};
+
+export const SUPPORTED_LANGUAGES = [
+  {
+    identifier: 'en',
+    name: 'English'
+  },
+  {
+    identifier: 'hi',
+    name: 'Hindi'
+  },
+  {
+    identifier: 'es',
+    name: 'Spanish'
+  }
+];

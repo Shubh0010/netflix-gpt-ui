@@ -9,7 +9,7 @@ const GPTMovieSuggestion = () => {
 
   return (
     <div
-      className="flex bg-black bg-opacity-60 p-20 m-10 mr-10 flex-wrap h-full"
+      className="flex bg-black bg-opacity-60 md:p-20 p-2 m-10 mr-10 flex-wrap h-full"
     >
       {
         moviesResult.map((movie) => <MovieCard key={movie.id} posterPath={movie.poster_path}/>)

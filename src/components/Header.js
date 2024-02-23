@@ -67,32 +67,38 @@ const Header = () => {
   }, []);
 
   return (
-    <div className='absolute px-8 py-2 bg-gradient-to-b from-gray-600 z-10 w-screen flex justify-between'>
-      <img className='w-60'
+    <div className='
+      absolute bg-gradient-to-b from-gray-600 z-10 w-screen flex
+      md:px-8 md:py-2 justify-between 
+    '>
+      <img className='w-20 h-10 mt-4
+      md:w-60 md:h-auto'
         src={APP_LOGO}
         alt='logo' />
       {user && <div className='flex h-24 mt-0'>
         {
           useGptSearch && (<select
           onChange={handleLanguageChange}
-          className='cursor-pointer text-white bg-slate-900 mx-4 rounded-md py-2 h-16 px-4 mt-6'
+          className='cursor-pointer text-white bg-slate-900 md:mx-4 rounded-md md:py-2 md:h-16 md:px-4 mt-6 h-8 px-4 mr-2 md:mr-0'
         >
           {SUPPORTED_LANGUAGES.map(language => <option key={language.identifier} value={language.identifier}>{language.name}</option>)}
         </select>)
         }
         <button 
-          className='cursor-pointer text-white bg-slate-900 mx-4 rounded-md py-2 h-16 px-4 mt-6'
+          className='
+          cursor-pointer text-white bg-slate-900 md:mx-4 rounded-md md:py-2 md:h-16 md:px-4 mt-6
+          h-8 px-4'
           onClick={handleGPTClick}
         >
           {useGptSearch ? 'Home': 'GPT Search'}
         </button>
         <img
-          className='w-16 h-16 my-6 p-2'
+          className='md:w-16 md:h-16 md:my-6 my-4 h-10 p-2'
           alt='profile-logo'
           src={PROFILE_LOGO}
         ></img>
         <button
-          className='cursor-pointer text-white'
+          className='cursor-pointer text-white mb-4'
           onClick={handleSignOut}
         >
           (Sign Out)
